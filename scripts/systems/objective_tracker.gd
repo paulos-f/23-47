@@ -19,7 +19,7 @@ func setup(inventory: PlayerInventory) -> void:
 
 func _refresh() -> void:
 	if KnowledgeManager.knows(&"midnight_origin_discovered"):
-		objective_changed.emit("Capítulo concluído: você descobriu de onde vem o evento da meia-noite.")
+		objective_changed.emit("Objetivo: use o elevador liberado e entre no setor principal.")
 	elif _inventory != null and _inventory.has_item(&"archive_access"):
 		objective_changed.emit("Objetivo: entre na sala de arquivo e examine o dossiê.")
 	elif _inventory != null and _inventory.has_item(&"fuse"):

@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/interactables/level_gate.gd" id="1_gate"]
+
+[sub_resource type="StandardMaterial3D" id="FrameMaterial"]
+albedo_color = Color(0.075, 0.085, 0.1, 1)
+metallic = 0.7
+roughness = 0.32
+
+[sub_resource type="StandardMaterial3D" id="DoorMaterial"]
+albedo_color = Color(0.14, 0.16, 0.18, 1)
+metallic = 0.55
+roughness = 0.4
+
+[sub_resource type="BoxMesh" id="DoorMesh"]
+material = SubResource("DoorMaterial")
+size = Vector3(2.5, 2.5, 0.18)
+
+[sub_resource type="BoxMesh" id="FrameMesh"]
+material = SubResource("FrameMaterial")
+size = Vector3(2.9, 2.8, 0.28)
+
+[sub_resource type="BoxShape3D" id="GateShape"]
+size = Vector3(2.7, 2.6, 0.32)
+
+[sub_resource type="StandardMaterial3D" id="PanelMaterial"]
+albedo_color = Color(0.05, 0.12, 0.11, 1)
+emission_enabled = true
+emission = Color(0.02, 0.16, 0.12, 1)
+
+[node name="LevelGate" type="StaticBody3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_gate")
+
+[node name="Frame" type="MeshInstance3D" parent="."]
+mesh = SubResource("FrameMesh")
+
+[node name="Door" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0, -0.16)
+mesh = SubResource("DoorMesh")
+
+[node name="AccessPanel" type="MeshInstance3D" parent="."]
+position = Vector3(1.05, 0.2, -0.3)
+scale = Vector3(0.28, 0.5, 0.12)
+mesh = SubResource("DoorMesh")
+material_override = SubResource("PanelMaterial")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("GateShape")
+
+[node name="StatusLight" type="OmniLight3D" parent="."]
+position = Vector3(1.05, 0.52, -0.42)
+light_color = Color(1, 0.12, 0.06, 1)
+light_energy = 1.6
+omni_range = 1.6
+

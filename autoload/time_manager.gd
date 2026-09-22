@@ -12,6 +12,8 @@ const LOOP_END_MINUTE := 24 * 60
 @export_range(0.0, 20.0, 0.1) var time_scale := 1.0
 
 var current_total_minutes := LOOP_START_MINUTE
+var loop_start_minute := LOOP_START_MINUTE
+var loop_end_minute := LOOP_END_MINUTE
 var _second_accumulator := 0.0
 var _running := false
 
@@ -27,7 +29,7 @@ func _process(delta: float) -> void:
 
 
 func start_loop() -> void:
-	current_total_minutes = LOOP_START_MINUTE
+	current_total_minutes = loop_start_minute
 	_second_accumulator = 0.0
 	_running = true
 	_emit_current_time()
@@ -39,6 +41,14 @@ func pause() -> void:
 
 func resume() -> void:
 	_running = true
+
+
+func configure_loop(start_hour: int, start_minute: int, end_hour: int, end_minute: int, seconds_per_minute: float) -> void:
+	loop_start_minute = start_hour * 60 + start_minute
+	loop_end_minute = end_hour * 60 + end_minute
+	if loop_end_minute <= loop_start_minute:
+		loop_end_minute += MINUTES_PER_DAY
+	seconds_per_game_minute = maxf(seconds_per_minute, 0.1)
 
 
 func get_display_time() -> String:
@@ -57,7 +67,7 @@ func get_minute() -> int:
 func _advance_minute() -> void:
 	current_total_minutes += 1
 	_emit_current_time()
-	if current_total_minutes >= LOOP_END_MINUTE:
+	if current_total_minutes >= loop_end_minute:
 		_running = false
 		loop_finished.emit()
 
@@ -67,4 +77,3 @@ func _emit_current_time() -> void:
 	var minute := get_minute()
 	minute_changed.emit(hour, minute, get_display_time())
 	time_reached.emit(hour, minute)
-

@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/main/research_wing.gd" id="1_main"]
+[ext_resource type="Script" path="res://scripts/environment/research_wing_environment.gd" id="2_environment"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="4_hud"]
+[ext_resource type="Script" path="res://scripts/audio/ambient_music.gd" id="5_music"]
+
+[node name="ResearchWing" type="Node3D"]
+script = ExtResource("1_main")
+
+[node name="Environment" type="Node3D" parent="."]
+script = ExtResource("2_environment")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector3(0, 0.95, 13.2)
+
+[node name="AmbientMusic" type="AudioStreamPlayer" parent="."]
+script = ExtResource("5_music")
+music_volume_db = -17.0
+
+[node name="HUD" parent="." instance=ExtResource("4_hud")]
+

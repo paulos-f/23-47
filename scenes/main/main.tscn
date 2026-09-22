@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3]
+[gd_scene load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://scripts/main/main.gd" id="1_main"]
 [ext_resource type="Script" path="res://scripts/environment/prototype_house.gd" id="2_house"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://scripts/npc/routine_point.gd" id="13_point"]
 [ext_resource type="PackedScene" path="res://scenes/interactables/fuse_box.tscn" id="14_fuse_box"]
 [ext_resource type="Script" path="res://scripts/audio/ambient_music.gd" id="15_music"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/level_gate.tscn" id="16_gate"]
 
 [node name="Loop2347" type="Node3D"]
 script = ExtResource("1_main")
@@ -39,7 +40,7 @@ position = Vector3(-4, 1.1, 0)
 open_angle = -95.0
 
 [node name="KnowledgeNote" parent="." instance=ExtResource("6_note")]
-position = Vector3(6.3, 1.41, -4.5)
+position = Vector3(9, 1.41, -3.7)
 rotation = Vector3(0, 0.25, 0)
 
 [node name="Safe" parent="." instance=ExtResource("7_safe")]
@@ -59,6 +60,9 @@ position = Vector3(7.4, 1.36, -7.45)
 rotation = Vector3(0, -0.18, 0)
 knowledge_key = &"midnight_origin_discovered"
 note_text = "23:58 — o sinal vem do andar superior. Não é um acidente."
+
+[node name="MainElevator" parent="." instance=ExtResource("16_gate")]
+position = Vector3(9.5, 1.35, 8.65)
 
 [node name="RoutinePoints" type="Node3D" parent="."]
 

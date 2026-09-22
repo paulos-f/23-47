@@ -20,6 +20,7 @@ O protótipo não depende de assets externos. A casa, os móveis e a iluminaçã
 
 ## Fluxo demonstrativo
 
+- A casa inicial funciona como lobby/tutorial. Concluir o dossiê libera o elevador para o jogo principal.
 - Às 23:51 o NPC deixa a chave do escritório na mesa da cozinha.
 - Às 23:54 ele tenta recolhê-la.
 - A chave abre o escritório, onde o bilhete revela `1987`.
@@ -27,7 +28,10 @@ O protótipo não depende de assets externos. A casa, os móveis e a iluminaçã
 - Sabendo `1987`, o cofre da sala pode ser aberto diretamente nos loops seguintes.
 - O cofre entrega um fusível físico. Instalá-lo no quadro do corredor abre a sala de arquivo.
 - O dossiê do arquivo revela uma nova informação persistente sobre o evento de 00:00.
+- O Setor de Pesquisa começa às 23:35, possui salas maiores e minutos mais lentos que o lobby.
 - Às 00:00 a cena escurece e reinicia; inventário e cenário são recriados, mas conhecimento e contador de loops ficam nos AutoLoads.
+
+O narrador acompanha a progressão pela HUD. Ele começa cooperativo, tenta direcionar as escolhas do jogador e fica mais irritado quando suas instruções são contrariadas.
 
 ## Ajustes rápidos
 

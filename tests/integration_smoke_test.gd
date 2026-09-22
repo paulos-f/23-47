@@ -88,6 +88,10 @@ func _run() -> void:
 	if not _check(fresh_inventory != null and not fresh_inventory.has_key(&"office_key"), "O inventário não foi limpo após o loop."):
 		return
 
+	var active_music := get_tree().current_scene.get_node_or_null("AmbientMusic") as AudioStreamPlayer
+	if active_music != null:
+		active_music.call("shutdown")
+	await get_tree().process_frame
 	get_tree().current_scene.queue_free()
 	await get_tree().process_frame
 	await get_tree().process_frame

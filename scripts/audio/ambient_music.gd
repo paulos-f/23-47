@@ -14,6 +14,7 @@ const CHORDS := [
 
 
 func _ready() -> void:
+	add_to_group("ambient_music")
 	stream = _build_ambient_loop()
 	volume_db = music_volume_db
 	play()
@@ -52,5 +53,9 @@ func _build_ambient_loop() -> AudioStreamWAV:
 
 
 func _exit_tree() -> void:
+	shutdown()
+
+
+func shutdown() -> void:
 	stop()
 	stream = null
