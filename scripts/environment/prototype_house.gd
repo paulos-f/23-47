@@ -62,7 +62,7 @@ func _build_furniture() -> void:
 	for corner in [Vector3(-5.55, 0.42, -3.5), Vector3(-3.25, 0.42, -3.5), Vector3(-5.55, 0.42, -2.5), Vector3(-3.25, 0.42, -2.5)]:
 		_create_box("TableLeg", corner, Vector3(0.15, 0.84, 0.15), wood)
 
-	_create_box("OfficeDesk", Vector3(6.3, 0.68, -4.5), Vector3(2.8, 1.36, 0.9), Color(0.15, 0.065, 0.03))
+	_create_box("OfficeDesk", Vector3(9.0, 0.68, -3.7), Vector3(2.8, 1.36, 0.9), Color(0.15, 0.065, 0.03))
 	_create_box("Sofa", Vector3(-1.0, 0.48, 4.4), Vector3(3.1, 0.95, 1.05), Color(0.12, 0.18, 0.2))
 	_create_box("LowTable", Vector3(2.0, 0.34, 4.0), Vector3(1.8, 0.68, 1.0), wood)
 	_create_box("HallCabinet", Vector3(-1.3, 0.7, -5.8), Vector3(1.4, 1.4, 0.55), Color(0.12, 0.07, 0.04))

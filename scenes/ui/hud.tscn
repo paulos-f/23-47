@@ -43,6 +43,27 @@ theme_override_colors/font_color = Color(0.72, 0.7, 0.64, 1)
 theme_override_font_sizes/font_size = 15
 text = "Objetivo"
 
+[node name="NarratorPanel" type="PanelContainer" parent="Interface"]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 290.0
+offset_top = 24.0
+offset_right = -290.0
+offset_bottom = 96.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="Text" type="Label" parent="Interface/NarratorPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.76, 0.84, 0.94, 1)
+theme_override_font_sizes/font_size = 18
+text = "NARRADOR"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [node name="Crosshair" type="Label" parent="Interface"]
 layout_mode = 1
 anchors_preset = 8
@@ -118,4 +139,3 @@ theme_override_font_sizes/font_size = 48
 text = "00:00"
 horizontal_alignment = 1
 vertical_alignment = 1
-

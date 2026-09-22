@@ -19,6 +19,7 @@ config/features=PackedStringArray("4.7")
 TimeManager="*res://autoload/time_manager.gd"
 KnowledgeManager="*res://autoload/knowledge_manager.gd"
 GameManager="*res://autoload/game_manager.gd"
+NarratorManager="*res://autoload/narrator_manager.gd"
 
 [display]
 
