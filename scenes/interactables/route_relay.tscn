@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/interactables/route_relay.gd" id="1_relay"]
+
+[sub_resource type="StandardMaterial3D" id="BodyMaterial"]
+albedo_color = Color(0.07, 0.08, 0.09, 1)
+metallic = 0.72
+roughness = 0.34
+
+[sub_resource type="StandardMaterial3D" id="CoilMaterial"]
+albedo_color = Color(0.24, 0.3, 0.34, 1)
+metallic = 0.5
+roughness = 0.28
+
+[sub_resource type="BoxMesh" id="BodyMesh"]
+material = SubResource("BodyMaterial")
+size = Vector3(0.72, 0.92, 0.28)
+
+[sub_resource type="CylinderMesh" id="CoilMesh"]
+material = SubResource("CoilMaterial")
+top_radius = 0.14
+bottom_radius = 0.14
+height = 0.5
+radial_segments = 16
+
+[sub_resource type="BoxShape3D" id="RelayShape"]
+size = Vector3(0.78, 0.98, 0.34)
+
+[node name="RouteRelay" type="StaticBody3D" groups=["route_relays"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_relay")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = SubResource("BodyMesh")
+
+[node name="Coil" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0, -0.22)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("CoilMesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("RelayShape")
+
+[node name="Indicator" type="OmniLight3D" parent="."]
+position = Vector3(0, 0.27, -0.3)
+light_color = Color(1, 0.52, 0.18, 1)
+light_energy = 0.7
+omni_range = 1.6
+
+[node name="RelayLabel" type="Label3D" parent="."]
+position = Vector3(0, -0.27, -0.18)
+pixel_size = 0.0018
+font_size = 32
+outline_size = 6
+text = "RELÉ 1"
+modulate = Color(0.78, 0.9, 1, 1)
+

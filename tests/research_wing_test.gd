@@ -21,8 +21,16 @@ func _run() -> void:
 	first_router.choose_route(&"archive")
 	if not _check(archive_door.is_open, "A rota do Arquivo não abriu sua porta."):
 		return
+	first_router.activate_relay(&"archive", 1)
+	if not _check(first_router.get_relay_progress() == 0, "A ordem incorreta não reiniciou os relés."):
+		return
+	first_router.activate_relay(&"archive", 0)
+	first_router.activate_relay(&"archive", 1)
 	first_loop.get_node("ArchiveSequence").interact(first_loop.get_node("Player"))
 	if not _check(_knowledge.knows(&"override_sequence_known"), "A sequência não virou conhecimento persistente."):
+		return
+	var synchronizer := first_loop.get_node("LoopSynchronizer") as LoopResetConsole
+	if not _check(synchronizer.get_interaction_prompt(first_loop.get_node("Player")) == "[E] Sincronizar próximo loop", "O reset antecipado não foi liberado após concluir a ala."):
 		return
 	await _discard_phase(first_loop)
 
@@ -31,6 +39,8 @@ func _run() -> void:
 	var player := second_loop.get_node("Player") as FirstPersonPlayer
 	var second_router := second_loop.get_node("PowerRouter") as PowerRouter
 	second_router.choose_route(&"laboratory")
+	second_router.activate_relay(&"laboratory", 0)
+	second_router.activate_relay(&"laboratory", 1)
 	await get_tree().process_frame
 	var keycard := get_tree().get_first_node_in_group("research_keycard") as InventoryPickup
 	if not _check(keycard != null, "A rota do Laboratório não disponibilizou o cartão."):
@@ -48,6 +58,11 @@ func _run() -> void:
 	if not _check(_knowledge.knows(&"phase_one_complete"), "O relatório final não concluiu a fase."):
 		return
 	if not _check(TimeManager.loop_start_minute >= 23 * 60 + 37 and TimeManager.seconds_per_game_minute < 7.0, "O narrador não dificultou o loop após ser contrariado."):
+		return
+	var chapter_exit := second_loop.get_node("ChapterExit") as LevelGate
+	if not _check(chapter_exit.get_interaction_prompt(player) == "[E] Entrar no elevador", "A saída do capítulo não foi liberada."):
+		return
+	if not _check(load("res://scenes/main/prototype_ending.tscn") is PackedScene, "A cena de encerramento não pôde ser carregada."):
 		return
 
 	await _discard_phase(second_loop)
@@ -69,7 +84,7 @@ func _discard_phase(scene: Node) -> void:
 	var music := scene.get_node_or_null("AmbientMusic")
 	if music != null:
 		music.call("shutdown")
-	await get_tree().process_frame
+	await get_tree().create_timer(0.12).timeout
 	scene.queue_free()
 	await get_tree().process_frame
 	await get_tree().process_frame

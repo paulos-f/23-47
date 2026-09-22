@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3]
+[gd_scene load_steps=20 format=3]
 
 [ext_resource type="Script" path="res://scripts/main/research_wing.gd" id="1_main"]
 [ext_resource type="Script" path="res://scripts/environment/research_wing_environment.gd" id="2_environment"]
@@ -16,6 +16,9 @@
 [ext_resource type="Script" path="res://scripts/systems/scheduled_event.gd" id="14_scheduled"]
 [ext_resource type="Script" path="res://scripts/systems/research_events.gd" id="15_research_events"]
 [ext_resource type="Script" path="res://scripts/environment/research_furnishings.gd" id="16_furnishings"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/route_relay.tscn" id="17_relay"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/loop_reset_console.tscn" id="18_reset"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/level_gate.tscn" id="19_gate"]
 
 [node name="ResearchWing" type="Node3D"]
 script = ExtResource("1_main")
@@ -66,6 +69,7 @@ rotation = Vector3(0, 3.14159, 0)
 position = Vector3(-11, 1.08, -3.2)
 knowledge_key = &"override_sequence_known"
 note_text = "Sequência de contingência: 4 — 1 — 3 — 2"
+required_stabilized_route = &"archive"
 
 [node name="ObservationReport" parent="." instance=ExtResource("11_note")]
 position = Vector3(0, 1.13, -12)
@@ -74,6 +78,43 @@ note_text = "PROTOCOLO 23:47 — os loops são induzidos. O narrador é o operad
 
 [node name="KeycardSpawn" type="Marker3D" parent="." groups=["phase_keycard_spawn"]]
 position = Vector3(11, 1.1, -3.2)
+
+[node name="ArchiveRelay1" parent="." instance=ExtResource("17_relay")]
+position = Vector3(-18.5, 1.0, -0.8)
+route_id = "archive"
+relay_index = 0
+relay_color = Color(1, 0.5, 0.15, 1)
+
+[node name="ArchiveRelay2" parent="." instance=ExtResource("17_relay")]
+position = Vector3(-5.2, 1.0, -6.5)
+rotation = Vector3(0, 3.14159, 0)
+route_id = "archive"
+relay_index = 1
+relay_color = Color(1, 0.5, 0.15, 1)
+
+[node name="LaboratoryRelay1" parent="." instance=ExtResource("17_relay")]
+position = Vector3(18.5, 1.0, -0.8)
+route_id = "laboratory"
+relay_index = 0
+relay_color = Color(0.15, 0.7, 1, 1)
+
+[node name="LaboratoryRelay2" parent="." instance=ExtResource("17_relay")]
+position = Vector3(5.2, 1.0, -6.5)
+rotation = Vector3(0, 3.14159, 0)
+route_id = "laboratory"
+relay_index = 1
+relay_color = Color(0.15, 0.7, 1, 1)
+
+[node name="LoopSynchronizer" parent="." instance=ExtResource("18_reset")]
+position = Vector3(5.0, 0.78, 9.0)
+
+[node name="ChapterExit" parent="." instance=ExtResource("19_gate")]
+position = Vector3(0, 1.4, -15.65)
+rotation = Vector3(0, 3.14159, 0)
+required_knowledge = &"phase_one_complete"
+next_scene_path = "res://scenes/main/prototype_ending.tscn"
+transition_title = "CAPÍTULO CONCLUÍDO"
+completion_knowledge = &"research_wing_exited"
 
 [node name="PowerRouter" type="Node" parent="." groups=["power_router"]]
 script = ExtResource("9_router")

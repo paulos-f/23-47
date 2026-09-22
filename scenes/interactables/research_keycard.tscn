@@ -23,6 +23,7 @@ script = ExtResource("1_pickup")
 item_id = &"research_keycard"
 display_name = "cartão de pesquisa"
 acquired_message = "Cartão de pesquisa adquirido. Ele não sobreviverá ao loop."
+knowledge_on_pickup = &"research_keycard_seen"
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("CardMesh")
@@ -34,4 +35,3 @@ shape = SubResource("CardShape")
 light_color = Color(0.2, 0.85, 1, 1)
 light_energy = 0.75
 omni_range = 1.6
-

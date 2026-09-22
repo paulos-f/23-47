@@ -88,3 +88,15 @@ func play_level_transition(title: String) -> void:
 	fade.tween_property(transition_rect, "modulate:a", 1.0, 0.8)
 	await fade.finished
 	await get_tree().create_timer(0.75).timeout
+
+
+func play_manual_loop_transition(reason: String, next_loop: int) -> void:
+	transition_rect.visible = true
+	transition_rect.modulate.a = 0.0
+	transition_label.text = reason
+	var fade := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+	fade.tween_property(transition_rect, "modulate:a", 1.0, 0.7)
+	await fade.finished
+	await get_tree().create_timer(0.55).timeout
+	transition_label.text = "LOOP %d" % next_loop
+	await get_tree().create_timer(0.75).timeout

@@ -31,6 +31,24 @@ func change_level(scene_path: String, title: String) -> void:
 	_transitioning = false
 
 
+func restart_current_loop(reason := "REINÍCIO MANUAL") -> void:
+	if _transitioning:
+		return
+	_transitioning = true
+	TimeManager.pause()
+	get_tree().call_group("player", "set_controls_enabled", false)
+	var transition_ui := get_tree().get_first_node_in_group("loop_transition_ui")
+	if transition_ui != null and transition_ui.has_method("play_manual_loop_transition"):
+		await transition_ui.play_manual_loop_transition(reason, KnowledgeManager.loop_count + 1)
+	KnowledgeManager.complete_loop()
+	get_tree().call_group("ambient_music", "shutdown")
+	await get_tree().process_frame
+	var reload_error := get_tree().reload_current_scene()
+	if reload_error != OK:
+		push_error("Falha ao reiniciar a cena: %s" % error_string(reload_error))
+	_transitioning = false
+
+
 func _on_loop_finished() -> void:
 	if _transitioning:
 		return
