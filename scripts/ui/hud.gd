@@ -10,6 +10,7 @@ extends CanvasLayer
 @onready var transition_label: Label = $Transition/CenterText
 @onready var narrator_panel: PanelContainer = $Interface/NarratorPanel
 @onready var narrator_label: Label = $Interface/NarratorPanel/Text
+@onready var operator_status: Label = $Interface/OperatorStatus
 
 var _message_generation := 0
 var _narrator_generation := 0
@@ -21,6 +22,11 @@ func set_clock(_hour: int, _minute: int, display_time: String) -> void:
 
 func set_loop_count(count: int) -> void:
 	loop_label.text = "LOOP %d" % count
+
+
+func set_narrator_anger(level: int) -> void:
+	operator_status.text = "OPERADOR // PRESSÃO %d/5" % level
+	operator_status.modulate = Color(1.0, 0.48, 0.35) if level >= 3 else Color(0.55, 0.66, 0.76)
 
 
 func set_interaction_prompt(text: String) -> void:

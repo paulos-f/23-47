@@ -23,7 +23,9 @@ func introduce_lobby() -> void:
 
 
 func introduce_research_wing() -> void:
-	if not KnowledgeManager.knows(&"override_sequence_known"):
+	if anger_level >= 2:
+		speak("Corrigi uma falha no cronograma. Você terá menos minutos desta vez.", &"angry")
+	elif not KnowledgeManager.knows(&"override_sequence_known"):
 		speak("Energize o Laboratório. O Arquivo é uma distração inútil.", &"calm")
 	else:
 		speak("Você trouxe uma resposta de outro loop. Isso não estava previsto.", &"irritated")
@@ -44,6 +46,15 @@ func clear_for_new_game() -> void:
 	anger_changed.emit(anger_level)
 
 
+func get_research_loop_settings() -> Dictionary:
+	# A fase base é generosa. A sabotagem só aparece após o jogador superar o narrador.
+	var pressure := maxi(anger_level - 1, 0)
+	return {
+		"start_minute": 35 + mini(pressure * 2, 8),
+		"seconds_per_minute": maxf(7.0 - pressure * 0.5, 5.5),
+	}
+
+
 func _on_knowledge_added(key: StringName, _value: Variant) -> void:
 	match key:
 		&"safe_code_discovered":
@@ -54,4 +65,3 @@ func _on_knowledge_added(key: StringName, _value: Variant) -> void:
 			register_defiance(&"archive_ignored_warning", "Eu disse que o Arquivo era inútil. Você está tornando isto desagradável.")
 		&"phase_one_complete":
 			register_defiance(&"phase_one_complete", "Você insiste em tratar minhas regras como peças de um quebra-cabeça.")
-

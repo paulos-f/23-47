@@ -47,7 +47,7 @@ func _run() -> void:
 	second_loop.get_node("ObservationReport").interact(player)
 	if not _check(_knowledge.knows(&"phase_one_complete"), "O relatório final não concluiu a fase."):
 		return
-	if not _check(TimeManager.loop_start_minute == 23 * 60 + 35 and TimeManager.seconds_per_game_minute == 7.0, "A configuração de tempo da fase está incorreta."):
+	if not _check(TimeManager.loop_start_minute >= 23 * 60 + 37 and TimeManager.seconds_per_game_minute < 7.0, "O narrador não dificultou o loop após ser contrariado."):
 		return
 
 	await _discard_phase(second_loop)
@@ -81,4 +81,3 @@ func _check(condition: bool, failure_message: String) -> bool:
 	push_error("RESEARCH_WING_TEST: %s" % failure_message)
 	get_tree().quit(1)
 	return false
-
