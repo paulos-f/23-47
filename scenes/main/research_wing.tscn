@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3]
+[gd_scene load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://scripts/main/research_wing.gd" id="1_main"]
 [ext_resource type="Script" path="res://scripts/environment/research_wing_environment.gd" id="2_environment"]
@@ -15,12 +15,16 @@
 [ext_resource type="Script" path="res://scripts/systems/event_manager.gd" id="13_events"]
 [ext_resource type="Script" path="res://scripts/systems/scheduled_event.gd" id="14_scheduled"]
 [ext_resource type="Script" path="res://scripts/systems/research_events.gd" id="15_research_events"]
+[ext_resource type="Script" path="res://scripts/environment/research_furnishings.gd" id="16_furnishings"]
 
 [node name="ResearchWing" type="Node3D"]
 script = ExtResource("1_main")
 
 [node name="Environment" type="Node3D" parent="."]
 script = ExtResource("2_environment")
+
+[node name="Furnishings" type="Node3D" parent="."]
+script = ExtResource("16_furnishings")
 
 [node name="Player" parent="." instance=ExtResource("3_player")]
 position = Vector3(0, 0.95, 13.2)
