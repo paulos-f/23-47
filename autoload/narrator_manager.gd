@@ -25,6 +25,8 @@ func introduce_lobby() -> void:
 func introduce_research_wing() -> void:
 	if anger_level >= 2:
 		speak("Corrigi uma falha no cronograma. Você terá menos minutos desta vez.", &"angry")
+	elif KnowledgeManager.knows(&"research_keycard_seen") and not KnowledgeManager.knows(&"override_sequence_known"):
+		speak("O cartão sumiu, como eu sabia que aconteceria. Talvez você devesse repensar a ordem.", &"calm")
 	elif not KnowledgeManager.knows(&"override_sequence_known"):
 		speak("Energize o Laboratório. O Arquivo é uma distração inútil.", &"calm")
 	else:

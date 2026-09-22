@@ -91,7 +91,7 @@ func _run() -> void:
 	var active_music := get_tree().current_scene.get_node_or_null("AmbientMusic") as AudioStreamPlayer
 	if active_music != null:
 		active_music.call("shutdown")
-	await get_tree().process_frame
+	await get_tree().create_timer(0.12).timeout
 	get_tree().current_scene.queue_free()
 	await get_tree().process_frame
 	await get_tree().process_frame

@@ -42,6 +42,9 @@ O distribuidor central só permite energizar uma ala por loop:
 - O **Arquivo** contém a sequência `4-1-3-2`, preservada como conhecimento.
 - O **Laboratório** disponibiliza um cartão físico, perdido às 00:00.
 - O terminal de Observação exige os dois. Escolher o Laboratório primeiro desperdiça o cartão; aprender a sequência antes permite concluir no loop seguinte.
+- Cada ala possui dois relés que precisam ser ativados na ordem `1 → 2` antes de liberar sua recompensa.
+- Quando não existe mais nada útil naquele loop, o sincronizador no átrio permite provocar o reset imediatamente.
+- O relatório da Observação libera o elevador final e uma tela de encerramento do Capítulo I.
 
 O narrador tenta induzir o jogador a escolher primeiro o caminho menos eficiente. Contrariá-lo e combinar informações de loops diferentes aumenta sua irritação.
 

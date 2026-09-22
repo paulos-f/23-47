@@ -4,6 +4,7 @@ extends StaticBody3D
 @export var required_knowledge: StringName = &"midnight_origin_discovered"
 @export_file("*.tscn") var next_scene_path := "res://scenes/main/research_wing.tscn"
 @export var transition_title := "SETOR DE PESQUISA"
+@export var completion_knowledge: StringName = &"lobby_completed"
 
 @onready var status_light: OmniLight3D = $StatusLight
 
@@ -20,7 +21,8 @@ func get_interaction_prompt(_player: Node) -> String:
 func interact(_player: Node) -> String:
 	if not KnowledgeManager.knows(required_knowledge):
 		return "ACESSO NEGADO — conclua o protocolo da antessala."
-	KnowledgeManager.learn(&"lobby_completed", true)
+	if completion_knowledge != &"":
+		KnowledgeManager.learn(completion_knowledge, true)
 	GameManager.call_deferred("change_level", next_scene_path, transition_title)
 	return "Acesso concedido. Descendo para o setor principal..."
 
@@ -33,4 +35,3 @@ func _refresh_status() -> void:
 func _on_knowledge_added(key: StringName, _value: Variant) -> void:
 	if key == required_knowledge:
 		_refresh_status()
-

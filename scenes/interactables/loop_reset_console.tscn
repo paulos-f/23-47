@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/interactables/loop_reset_console.gd" id="1_reset"]
+
+[sub_resource type="StandardMaterial3D" id="BodyMaterial"]
+albedo_color = Color(0.055, 0.065, 0.085, 1)
+metallic = 0.75
+roughness = 0.3
+
+[sub_resource type="StandardMaterial3D" id="RingMaterial"]
+albedo_color = Color(0.08, 0.28, 0.38, 1)
+emission_enabled = true
+emission = Color(0.03, 0.25, 0.42, 1)
+
+[sub_resource type="CylinderMesh" id="BodyMesh"]
+material = SubResource("BodyMaterial")
+top_radius = 0.55
+bottom_radius = 0.72
+height = 1.25
+radial_segments = 20
+
+[sub_resource type="TorusMesh" id="RingMesh"]
+material = SubResource("RingMaterial")
+inner_radius = 0.35
+outer_radius = 0.52
+rings = 20
+ring_segments = 12
+
+[sub_resource type="CylinderShape3D" id="ResetShape"]
+radius = 0.72
+height = 1.3
+
+[node name="LoopResetConsole" type="StaticBody3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_reset")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = SubResource("BodyMesh")
+
+[node name="Ring" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.7, 0)
+mesh = SubResource("RingMesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ResetShape")
+
+[node name="Indicator" type="OmniLight3D" parent="."]
+position = Vector3(0, 0.75, 0)
+light_color = Color(0.16, 0.48, 0.7, 1)
+light_energy = 1.1
+omni_range = 2.0
+
+[node name="Label3D" type="Label3D" parent="."]
+position = Vector3(0, 0.05, -0.72)
+pixel_size = 0.0018
+font_size = 30
+outline_size = 6
+text = "SINCRONIZAR"
+modulate = Color(0.62, 0.86, 1, 1)
+

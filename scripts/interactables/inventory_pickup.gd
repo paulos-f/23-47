@@ -4,6 +4,7 @@ extends StaticBody3D
 @export var item_id: StringName = &"fuse"
 @export var display_name := "fusível de cerâmica"
 @export var acquired_message := "Fusível adquirido."
+@export var knowledge_on_pickup: StringName = &""
 
 var collected := false
 
@@ -20,6 +21,7 @@ func interact(player: Node) -> String:
 		return "Você não consegue guardar o objeto."
 	collected = true
 	inventory.add_item(item_id)
+	if knowledge_on_pickup != &"":
+		KnowledgeManager.learn(knowledge_on_pickup, true)
 	queue_free()
 	return acquired_message
-
