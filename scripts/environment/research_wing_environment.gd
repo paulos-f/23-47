@@ -38,9 +38,9 @@ func _build_architecture() -> void:
 	_create_box("EastWall", Vector3(22, WALL_HEIGHT / 2.0, 0), Vector3(0.3, WALL_HEIGHT, 32), wall_color)
 
 	# Duas alas grandes, ambas visíveis a partir do átrio central.
-	_create_box("WingWallLeft", Vector3(-16.5, WALL_HEIGHT / 2.0, 2), Vector3(11, WALL_HEIGHT, 0.24), wall_color)
-	_create_box("WingWallCenter", Vector3(0, WALL_HEIGHT / 2.0, 2), Vector3(12, WALL_HEIGHT, 0.24), wall_color)
-	_create_box("WingWallRight", Vector3(16.5, WALL_HEIGHT / 2.0, 2), Vector3(11, WALL_HEIGHT, 0.24), wall_color)
+	_create_box("WingWallLeft", Vector3(-16.4, WALL_HEIGHT / 2.0, 2), Vector3(11.2, WALL_HEIGHT, 0.24), wall_color)
+	_create_box("WingWallCenter", Vector3(0, WALL_HEIGHT / 2.0, 2), Vector3(18.4, WALL_HEIGHT, 0.24), wall_color)
+	_create_box("WingWallRight", Vector3(16.4, WALL_HEIGHT / 2.0, 2), Vector3(11.2, WALL_HEIGHT, 0.24), wall_color)
 	_create_box("RearWallLeft", Vector3(-11.5, WALL_HEIGHT / 2.0, -8), Vector3(21, WALL_HEIGHT, 0.24), wall_color)
 	_create_box("RearWallRight", Vector3(11.5, WALL_HEIGHT / 2.0, -8), Vector3(21, WALL_HEIGHT, 0.24), wall_color)
 	_create_box("CentralDivider", Vector3(0, WALL_HEIGHT / 2.0, -3), Vector3(0.24, WALL_HEIGHT, 10), wall_color)
@@ -51,6 +51,7 @@ func _build_landmarks() -> void:
 	_create_box("ArchiveIsland", Vector3(-11, 0.52, -3.2), Vector3(5.5, 1.04, 1.3), Color(0.12, 0.075, 0.04))
 	_create_box("LabIsland", Vector3(11, 0.52, -3.2), Vector3(5.5, 1.04, 1.3), Color(0.075, 0.12, 0.12))
 	_create_box("ControlPlinth", Vector3(0, 0.55, 5.2), Vector3(5.4, 1.1, 1.1), Color(0.08, 0.09, 0.11))
+	_create_box("ObservationDesk", Vector3(0, 0.55, -12.0), Vector3(4.2, 1.1, 1.2), Color(0.07, 0.08, 0.095))
 	_add_label("ÁTRIO DE DISTRIBUIÇÃO", Vector3(0, 2.35, 1.82))
 	_add_label("ARQUIVO", Vector3(-11, 2.35, 1.82))
 	_add_label("LABORATÓRIO", Vector3(11, 2.35, 1.82))
@@ -119,4 +120,3 @@ func _add_label(text_value: String, position_value: Vector3) -> void:
 	label.outline_size = 8
 	label.modulate = Color(0.66, 0.78, 0.88)
 	add_child(label)
-

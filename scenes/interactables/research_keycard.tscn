@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/interactables/inventory_pickup.gd" id="1_pickup"]
+
+[sub_resource type="StandardMaterial3D" id="CardMaterial"]
+albedo_color = Color(0.08, 0.52, 0.62, 1)
+metallic = 0.25
+roughness = 0.3
+emission_enabled = true
+emission = Color(0.015, 0.16, 0.2, 1)
+
+[sub_resource type="BoxMesh" id="CardMesh"]
+material = SubResource("CardMaterial")
+size = Vector3(0.34, 0.04, 0.22)
+
+[sub_resource type="BoxShape3D" id="CardShape"]
+size = Vector3(0.4, 0.09, 0.28)
+
+[node name="ResearchKeycard" type="StaticBody3D" groups=["research_keycard"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_pickup")
+item_id = &"research_keycard"
+display_name = "cartão de pesquisa"
+acquired_message = "Cartão de pesquisa adquirido. Ele não sobreviverá ao loop."
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("CardMesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CardShape")
+
+[node name="Glow" type="OmniLight3D" parent="."]
+light_color = Color(0.2, 0.85, 1, 1)
+light_energy = 0.75
+omni_range = 1.6
+
