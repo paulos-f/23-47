@@ -7,7 +7,9 @@ Protótipo 3D em primeira pessoa para Godot 4.x. O relógio avança de 23:47 at�
 1. Abra `project.godot` no Godot 4.x.
 2. Pressione **F6/F5** ou use **Executar projeto**.
 
-O protótipo não depende de assets externos. A casa, os móveis e a iluminação são criados com primitivas.
+O protótipo não depende de plugins ou downloads em tempo de execução; todos os recursos necessários ficam versionados no projeto.
+
+O lobby continua usando primitivas, enquanto o Setor de Pesquisa combina a arquitetura procedural com uma seleção de móveis GLB do **Kenney Furniture Kit**, distribuído sob licença CC0. A origem e a licença estão em `assets/external/kenney_furniture/`.
 
 ## Controles
 

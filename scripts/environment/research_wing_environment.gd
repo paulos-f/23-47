@@ -47,11 +47,7 @@ func _build_architecture() -> void:
 
 
 func _build_landmarks() -> void:
-	_create_box("Reception", Vector3(0, 0.62, 9.2), Vector3(6.5, 1.24, 1.2), Color(0.09, 0.12, 0.13))
-	_create_box("ArchiveIsland", Vector3(-11, 0.52, -3.2), Vector3(5.5, 1.04, 1.3), Color(0.12, 0.075, 0.04))
-	_create_box("LabIsland", Vector3(11, 0.52, -3.2), Vector3(5.5, 1.04, 1.3), Color(0.075, 0.12, 0.12))
 	_create_box("ControlPlinth", Vector3(0, 0.55, 5.2), Vector3(5.4, 1.1, 1.1), Color(0.08, 0.09, 0.11))
-	_create_box("ObservationDesk", Vector3(0, 0.55, -12.0), Vector3(4.2, 1.1, 1.2), Color(0.07, 0.08, 0.095))
 	_add_label("ÁTRIO DE DISTRIBUIÇÃO", Vector3(0, 2.35, 1.82))
 	_add_label("ARQUIVO", Vector3(-11, 2.35, 1.82))
 	_add_label("LABORATÓRIO", Vector3(11, 2.35, 1.82))
