@@ -1,0 +1,121 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_hud"]
+
+[node name="HUD" type="CanvasLayer" groups=["loop_transition_ui"]]
+script = ExtResource("1_hud")
+
+[node name="Interface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ClockPanel" type="VBoxContainer" parent="Interface"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 26.0
+offset_right = 210.0
+offset_bottom = 100.0
+
+[node name="Clock" type="Label" parent="Interface/ClockPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.88, 0.76, 1)
+theme_override_font_sizes/font_size = 30
+text = "23:47"
+
+[node name="Loop" type="Label" parent="Interface/ClockPanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.58, 0.56, 0.51, 1)
+theme_override_font_sizes/font_size = 14
+text = "LOOP 1"
+
+[node name="Objective" type="Label" parent="Interface"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 112.0
+offset_right = 560.0
+offset_bottom = 148.0
+theme_override_colors/font_color = Color(0.72, 0.7, 0.64, 1)
+theme_override_font_sizes/font_size = 15
+text = "Objetivo"
+
+[node name="Crosshair" type="Label" parent="Interface"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -14.0
+offset_right = 7.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.86, 0.84, 0.78, 0.72)
+theme_override_font_sizes/font_size = 20
+text = "+"
+horizontal_alignment = 1
+
+[node name="InteractionPrompt" type="Label" parent="Interface"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -260.0
+offset_top = -126.0
+offset_right = 260.0
+offset_bottom = -88.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.95, 0.89, 0.72, 1)
+theme_override_font_sizes/font_size = 19
+horizontal_alignment = 1
+
+[node name="Message" type="Label" parent="Interface"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -430.0
+offset_top = -78.0
+offset_right = 430.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.84, 0.84, 0.8, 1)
+theme_override_font_sizes/font_size = 17
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Transition" type="ColorRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.005, 0.006, 0.01, 1)
+
+[node name="CenterText" type="Label" parent="Transition"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.92, 0.88, 0.8, 1)
+theme_override_font_sizes/font_size = 48
+text = "00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+

@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/interactables/knowledge_note.gd" id="1_note"]
+
+[sub_resource type="StandardMaterial3D" id="PaperMaterial"]
+albedo_color = Color(0.72, 0.68, 0.52, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="PaperMesh"]
+material = SubResource("PaperMaterial")
+size = Vector3(0.42, 0.012, 0.28)
+
+[sub_resource type="BoxShape3D" id="PaperShape"]
+size = Vector3(0.46, 0.05, 0.32)
+
+[node name="KnowledgeNote" type="StaticBody3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_note")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PaperMesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("PaperShape")
+

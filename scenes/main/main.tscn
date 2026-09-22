@@ -1,0 +1,161 @@
+[gd_scene load_steps=16 format=3]
+
+[ext_resource type="Script" path="res://scripts/main/main.gd" id="1_main"]
+[ext_resource type="Script" path="res://scripts/environment/prototype_house.gd" id="2_house"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/npc/npc.tscn" id="4_npc"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/door.tscn" id="5_door"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/knowledge_note.tscn" id="6_note"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/safe.tscn" id="7_safe"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="8_hud"]
+[ext_resource type="Script" path="res://scripts/systems/event_manager.gd" id="9_events"]
+[ext_resource type="Script" path="res://scripts/systems/scheduled_event.gd" id="10_event"]
+[ext_resource type="Script" path="res://scripts/systems/house_events.gd" id="11_house_events"]
+[ext_resource type="Script" path="res://scripts/systems/objective_tracker.gd" id="12_objectives"]
+[ext_resource type="Script" path="res://scripts/npc/routine_point.gd" id="13_point"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/fuse_box.tscn" id="14_fuse_box"]
+[ext_resource type="Script" path="res://scripts/audio/ambient_music.gd" id="15_music"]
+
+[node name="Loop2347" type="Node3D"]
+script = ExtResource("1_main")
+
+[node name="House" type="Node3D" parent="."]
+script = ExtResource("2_house")
+
+[node name="Player" parent="." instance=ExtResource("3_player")]
+position = Vector3(0, 0.9, 6.5)
+
+[node name="NPC" parent="." instance=ExtResource("4_npc")]
+position = Vector3(-2.5, 0.85, 3.5)
+
+[node name="OfficeDoor" parent="." instance=ExtResource("5_door")]
+position = Vector3(3, 1.1, 0)
+locked = true
+required_key = &"office_key"
+open_angle = 98.0
+
+[node name="HallDoor" parent="." groups=["timed_door"] instance=ExtResource("5_door")]
+position = Vector3(-4, 1.1, 0)
+open_angle = -95.0
+
+[node name="KnowledgeNote" parent="." instance=ExtResource("6_note")]
+position = Vector3(6.3, 1.41, -4.5)
+rotation = Vector3(0, 0.25, 0)
+
+[node name="Safe" parent="." instance=ExtResource("7_safe")]
+position = Vector3(5.2, 0.43, 4.9)
+rotation = Vector3(0, 0.3, 0)
+
+[node name="FuseBox" parent="." instance=ExtResource("14_fuse_box")]
+position = Vector3(-1.4, 1.35, -0.22)
+
+[node name="ArchiveDoor" parent="." groups=["archive_door"] instance=ExtResource("5_door")]
+position = Vector3(5.2, 1.1, -5.7)
+locked = true
+open_angle = -98.0
+
+[node name="ArchiveDossier" parent="." instance=ExtResource("6_note")]
+position = Vector3(7.4, 1.36, -7.45)
+rotation = Vector3(0, -0.18, 0)
+knowledge_key = &"midnight_origin_discovered"
+note_text = "23:58 — o sinal vem do andar superior. Não é um acidente."
+
+[node name="RoutinePoints" type="Node3D" parent="."]
+
+[node name="NPCPoint_Sala" type="Marker3D" parent="RoutinePoints" groups=["npc_routine_points"]]
+position = Vector3(-2.5, 0.85, 3.5)
+script = ExtResource("13_point")
+activity = "sentado na sala"
+
+[node name="NPCPoint_Levanta" type="Marker3D" parent="RoutinePoints" groups=["npc_routine_points"]]
+position = Vector3(-1.2, 0.85, 2.2)
+script = ExtResource("13_point")
+trigger_minute = 50
+activity = "indo para a cozinha"
+
+[node name="NPCPoint_Cozinha" type="Marker3D" parent="RoutinePoints" groups=["npc_routine_points"]]
+position = Vector3(-3.4, 0.85, -1.65)
+script = ExtResource("13_point")
+trigger_minute = 51
+activity = "na cozinha"
+
+[node name="NPCPoint_Corredor" type="Marker3D" parent="RoutinePoints" groups=["npc_routine_points"]]
+position = Vector3(-0.7, 0.85, -1.8)
+script = ExtResource("13_point")
+trigger_minute = 54
+activity = "no corredor"
+
+[node name="NPCPoint_Quarto" type="Marker3D" parent="RoutinePoints" groups=["npc_routine_points"]]
+position = Vector3(-0.7, 0.85, -7.0)
+script = ExtResource("13_point")
+trigger_minute = 56
+activity = "no quarto"
+
+[node name="KeyDropPoint" type="Marker3D" parent="RoutinePoints" groups=["key_drop_point"]]
+position = Vector3(-4.4, 1.07, -3)
+
+[node name="HouseEvents" type="Node" parent="." groups=["house_events"]]
+script = ExtResource("11_house_events")
+
+[node name="EventManager" type="Node" parent="."]
+script = ExtResource("9_events")
+
+[node name="PhoneRings" type="Node" parent="EventManager"]
+script = ExtResource("10_event")
+trigger_minute = 50
+target_group = &"house_events"
+method_name = &"phone_ring"
+debug_label = "Telefone toca"
+
+[node name="NPCDropsKey" type="Node" parent="EventManager"]
+script = ExtResource("10_event")
+trigger_minute = 51
+target_group = &"npc"
+method_name = &"place_key_on_table"
+debug_label = "NPC deixa a chave"
+
+[node name="HallDoorOpens" type="Node" parent="EventManager"]
+script = ExtResource("10_event")
+trigger_minute = 52
+target_group = &"timed_door"
+method_name = &"force_open"
+debug_label = "Porta do corredor abre"
+
+[node name="NPCTakesKey" type="Node" parent="EventManager"]
+script = ExtResource("10_event")
+trigger_minute = 54
+target_group = &"npc"
+method_name = &"take_key_from_table"
+debug_label = "NPC recolhe a chave"
+
+[node name="LightsFlicker" type="Node" parent="EventManager"]
+script = ExtResource("10_event")
+trigger_minute = 58
+target_group = &"house_events"
+method_name = &"start_light_flicker"
+debug_label = "Luzes piscam"
+
+[node name="PowerDown" type="Node" parent="EventManager"]
+script = ExtResource("10_event")
+trigger_minute = 59
+target_group = &"house_events"
+method_name = &"power_down"
+debug_label = "Queda de energia"
+
+[node name="ObjectiveTracker" type="Node" parent="."]
+script = ExtResource("12_objectives")
+
+[node name="AudioPlaceholders" type="Node3D" parent="."]
+
+[node name="Clock" type="AudioStreamPlayer3D" parent="AudioPlaceholders"]
+
+[node name="Phone" type="AudioStreamPlayer3D" parent="AudioPlaceholders"]
+
+[node name="Power" type="AudioStreamPlayer3D" parent="AudioPlaceholders"]
+
+[node name="MidnightImpact" type="AudioStreamPlayer3D" parent="AudioPlaceholders"]
+
+[node name="AmbientMusic" type="AudioStreamPlayer" parent="."]
+script = ExtResource("15_music")
+
+[node name="HUD" parent="." instance=ExtResource("8_hud")]

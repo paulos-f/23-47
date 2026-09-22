@@ -1,0 +1,150 @@
+[gd_scene load_steps=18 format=3]
+
+[ext_resource type="Script" path="res://scripts/npc/temporal_npc.gd" id="1_npc"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/key_pickup.tscn" id="2_key"]
+
+[sub_resource type="StandardMaterial3D" id="CoatMaterial"]
+albedo_color = Color(0.075, 0.12, 0.18, 1)
+roughness = 0.75
+
+[sub_resource type="StandardMaterial3D" id="ShirtMaterial"]
+albedo_color = Color(0.34, 0.12, 0.1, 1)
+roughness = 0.8
+
+[sub_resource type="StandardMaterial3D" id="PantsMaterial"]
+albedo_color = Color(0.045, 0.052, 0.065, 1)
+roughness = 0.9
+
+[sub_resource type="StandardMaterial3D" id="SkinMaterial"]
+albedo_color = Color(0.58, 0.38, 0.27, 1)
+roughness = 0.82
+
+[sub_resource type="StandardMaterial3D" id="HairMaterial"]
+albedo_color = Color(0.035, 0.025, 0.02, 1)
+roughness = 0.95
+
+[sub_resource type="StandardMaterial3D" id="EyeMaterial"]
+albedo_color = Color(0.015, 0.018, 0.02, 1)
+roughness = 0.45
+
+[sub_resource type="BoxMesh" id="TorsoMesh"]
+material = SubResource("CoatMaterial")
+size = Vector3(0.68, 0.78, 0.34)
+
+[sub_resource type="BoxMesh" id="ShirtMesh"]
+material = SubResource("ShirtMaterial")
+size = Vector3(0.38, 0.56, 0.025)
+
+[sub_resource type="CapsuleMesh" id="LimbMesh"]
+material = SubResource("CoatMaterial")
+radius = 0.105
+height = 0.62
+radial_segments = 12
+rings = 4
+
+[sub_resource type="CapsuleMesh" id="LegMesh"]
+material = SubResource("PantsMaterial")
+radius = 0.13
+height = 0.7
+radial_segments = 12
+rings = 4
+
+[sub_resource type="SphereMesh" id="HeadMesh"]
+material = SubResource("SkinMaterial")
+radius = 0.255
+height = 0.51
+radial_segments = 24
+rings = 12
+
+[sub_resource type="SphereMesh" id="HairMesh"]
+material = SubResource("HairMaterial")
+radius = 0.262
+height = 0.35
+radial_segments = 20
+rings = 8
+
+[sub_resource type="SphereMesh" id="EyeMesh"]
+material = SubResource("EyeMaterial")
+radius = 0.028
+height = 0.056
+radial_segments = 12
+rings = 6
+
+[sub_resource type="BoxMesh" id="ShoeMesh"]
+material = SubResource("HairMaterial")
+size = Vector3(0.24, 0.13, 0.38)
+
+[sub_resource type="CapsuleShape3D" id="NpcShape"]
+radius = 0.34
+height = 1.7
+
+[node name="NPC" type="CharacterBody3D" groups=["npc"]]
+collision_layer = 10
+collision_mask = 1
+script = ExtResource("1_npc")
+carried_key_scene = ExtResource("2_key")
+
+[node name="Visual" type="Node3D" parent="."]
+
+[node name="Torso" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.12, 0)
+mesh = SubResource("TorsoMesh")
+
+[node name="Shirt" type="MeshInstance3D" parent="Visual/Torso"]
+position = Vector3(0, 0.02, -0.185)
+mesh = SubResource("ShirtMesh")
+
+[node name="Head" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.78, 0)
+mesh = SubResource("HeadMesh")
+
+[node name="Hair" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0, 0.91, 0.025)
+mesh = SubResource("HairMesh")
+
+[node name="LeftEye" type="MeshInstance3D" parent="Visual"]
+position = Vector3(-0.09, 0.81, -0.235)
+mesh = SubResource("EyeMesh")
+
+[node name="RightEye" type="MeshInstance3D" parent="Visual"]
+position = Vector3(0.09, 0.81, -0.235)
+mesh = SubResource("EyeMesh")
+
+[node name="LeftArm" type="Node3D" parent="Visual"]
+position = Vector3(-0.43, 0.34, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Visual/LeftArm"]
+position = Vector3(0, -0.27, 0)
+mesh = SubResource("LimbMesh")
+
+[node name="RightArm" type="Node3D" parent="Visual"]
+position = Vector3(0.43, 0.34, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Visual/RightArm"]
+position = Vector3(0, -0.27, 0)
+mesh = SubResource("LimbMesh")
+
+[node name="LeftLeg" type="Node3D" parent="Visual"]
+position = Vector3(-0.18, -0.3, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Visual/LeftLeg"]
+position = Vector3(0, -0.31, 0)
+mesh = SubResource("LegMesh")
+
+[node name="Shoe" type="MeshInstance3D" parent="Visual/LeftLeg"]
+position = Vector3(0, -0.66, -0.08)
+mesh = SubResource("ShoeMesh")
+
+[node name="RightLeg" type="Node3D" parent="Visual"]
+position = Vector3(0.18, -0.3, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Visual/RightLeg"]
+position = Vector3(0, -0.31, 0)
+mesh = SubResource("LegMesh")
+
+[node name="Shoe" type="MeshInstance3D" parent="Visual/RightLeg"]
+position = Vector3(0, -0.66, -0.08)
+mesh = SubResource("ShoeMesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("NpcShape")

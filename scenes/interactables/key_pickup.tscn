@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/interactables/key_pickup.gd" id="1_key"]
+
+[sub_resource type="StandardMaterial3D" id="KeyMaterial"]
+albedo_color = Color(0.83, 0.57, 0.1, 1)
+metallic = 0.75
+roughness = 0.25
+
+[sub_resource type="CylinderMesh" id="KeyMesh"]
+material = SubResource("KeyMaterial")
+top_radius = 0.055
+bottom_radius = 0.055
+height = 0.32
+radial_segments = 12
+
+[sub_resource type="CylinderShape3D" id="KeyShape"]
+radius = 0.1
+height = 0.4
+
+[node name="OfficeKey" type="StaticBody3D" groups=["collectible_key"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_key")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("KeyMesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+rotation = Vector3(0, 0, 1.5708)
+shape = SubResource("KeyShape")
+
+[node name="Glow" type="OmniLight3D" parent="."]
+light_color = Color(1, 0.67, 0.25, 1)
+light_energy = 0.35
+omni_range = 1.2
+

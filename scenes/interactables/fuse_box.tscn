@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/interactables/fuse_box.gd" id="1_panel"]
+
+[sub_resource type="StandardMaterial3D" id="PanelMaterial"]
+albedo_color = Color(0.09, 0.105, 0.1, 1)
+metallic = 0.65
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="LeverMaterial"]
+albedo_color = Color(0.55, 0.11, 0.06, 1)
+roughness = 0.55
+
+[sub_resource type="BoxMesh" id="PanelMesh"]
+material = SubResource("PanelMaterial")
+size = Vector3(0.68, 0.82, 0.18)
+
+[sub_resource type="BoxMesh" id="LeverMesh"]
+material = SubResource("LeverMaterial")
+size = Vector3(0.1, 0.42, 0.1)
+
+[sub_resource type="BoxShape3D" id="PanelShape"]
+size = Vector3(0.72, 0.86, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="LabelMaterial"]
+albedo_color = Color(0.72, 0.63, 0.36, 1)
+emission_enabled = true
+emission = Color(0.2, 0.12, 0.025, 1)
+
+[sub_resource type="BoxMesh" id="LabelMesh"]
+material = SubResource("LabelMaterial")
+size = Vector3(0.38, 0.1, 0.025)
+
+[node name="FuseBox" type="StaticBody3D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_panel")
+
+[node name="Panel" type="MeshInstance3D" parent="."]
+mesh = SubResource("PanelMesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("PanelShape")
+
+[node name="Lever" type="Node3D" parent="."]
+position = Vector3(0, 0.03, -0.14)
+
+[node name="Mesh" type="MeshInstance3D" parent="Lever"]
+position = Vector3(0, -0.13, 0)
+mesh = SubResource("LeverMesh")
+
+[node name="CircuitLabel" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.29, -0.105)
+mesh = SubResource("LabelMesh")
+
+[node name="Indicator" type="OmniLight3D" parent="."]
+position = Vector3(0.23, 0.28, -0.18)
+light_color = Color(1, 0.18, 0.08, 1)
+light_energy = 1.1
+omni_range = 1.1
+

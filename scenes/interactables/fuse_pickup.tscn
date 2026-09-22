@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/interactables/inventory_pickup.gd" id="1_pickup"]
+
+[sub_resource type="StandardMaterial3D" id="CeramicMaterial"]
+albedo_color = Color(0.82, 0.77, 0.62, 1)
+roughness = 0.72
+
+[sub_resource type="StandardMaterial3D" id="MetalMaterial"]
+albedo_color = Color(0.52, 0.36, 0.12, 1)
+metallic = 0.85
+roughness = 0.22
+
+[sub_resource type="CylinderMesh" id="FuseBodyMesh"]
+material = SubResource("CeramicMaterial")
+top_radius = 0.075
+bottom_radius = 0.075
+height = 0.3
+radial_segments = 16
+
+[sub_resource type="CylinderMesh" id="CapMesh"]
+material = SubResource("MetalMaterial")
+top_radius = 0.085
+bottom_radius = 0.085
+height = 0.065
+radial_segments = 16
+
+[sub_resource type="CylinderShape3D" id="FuseShape"]
+radius = 0.11
+height = 0.45
+
+[node name="FusePickup" type="StaticBody3D" groups=["safe_reward"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_pickup")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("FuseBodyMesh")
+
+[node name="LeftCap" type="MeshInstance3D" parent="."]
+position = Vector3(-0.18, 0, 0)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("CapMesh")
+
+[node name="RightCap" type="MeshInstance3D" parent="."]
+position = Vector3(0.18, 0, 0)
+rotation = Vector3(0, 0, 1.5708)
+mesh = SubResource("CapMesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+rotation = Vector3(0, 0, 1.5708)
+shape = SubResource("FuseShape")
+
+[node name="Glow" type="OmniLight3D" parent="."]
+light_color = Color(1, 0.72, 0.3, 1)
+light_energy = 0.5
+omni_range = 1.4
+
