@@ -33,6 +33,16 @@ O protótipo não depende de assets externos. A casa, os móveis e a iluminaçã
 
 O narrador acompanha a progressão pela HUD. Ele começa cooperativo, tenta direcionar as escolhas do jogador e fica mais irritado quando suas instruções são contrariadas.
 
+### Puzzle do Setor de Pesquisa
+
+O distribuidor central só permite energizar uma ala por loop:
+
+- O **Arquivo** contém a sequência `4-1-3-2`, preservada como conhecimento.
+- O **Laboratório** disponibiliza um cartão físico, perdido às 00:00.
+- O terminal de Observação exige os dois. Escolher o Laboratório primeiro desperdiça o cartão; aprender a sequência antes permite concluir no loop seguinte.
+
+O narrador tenta induzir o jogador a escolher primeiro o caminho menos eficiente. Contrariá-lo e combinar informações de loops diferentes aumenta sua irritação.
+
 ## Ajustes rápidos
 
 Em `autoload/time_manager.gd`, `seconds_per_game_minute` define quantos segundos reais dura cada minuto, e `time_scale` multiplica a velocidade. O padrão completa um loop em aproximadamente 65 segundos.
@@ -43,6 +53,7 @@ Para executar o teste de integração pelo terminal, substitua `godot4` pelo cam
 
 ```bash
 godot4 --headless --path . res://tests/integration_smoke_test.tscn
+godot4 --headless --path . res://tests/research_wing_test.tscn
 ```
 
 ## Placeholders
