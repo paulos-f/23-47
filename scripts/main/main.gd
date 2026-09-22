@@ -10,12 +10,14 @@ func _ready() -> void:
 	player.message_requested.connect(hud.show_message)
 	GameManager.message_requested.connect(hud.show_message)
 	NarratorManager.line_spoken.connect(hud.show_narrator)
+	NarratorManager.anger_changed.connect(hud.set_narrator_anger)
 	TimeManager.minute_changed.connect(hud.set_clock)
 	KnowledgeManager.loop_count_changed.connect(hud.set_loop_count)
 	objective_tracker.objective_changed.connect(hud.set_objective)
 	objective_tracker.setup(player.inventory)
 
 	hud.set_loop_count(KnowledgeManager.loop_count)
+	hud.set_narrator_anger(NarratorManager.anger_level)
 	TimeManager.configure_loop(23, 47, 0, 0, 5.0)
 	TimeManager.start_loop()
 	if KnowledgeManager.loop_count == 1:

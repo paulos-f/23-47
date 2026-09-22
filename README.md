@@ -43,6 +43,8 @@ O distribuidor central só permite energizar uma ala por loop:
 
 O narrador tenta induzir o jogador a escolher primeiro o caminho menos eficiente. Contrariá-lo e combinar informações de loops diferentes aumenta sua irritação.
 
+A irritação não é apenas cosmética. Depois que o jogador contraria o operador, os loops futuros do Setor de Pesquisa começam alguns minutos mais tarde e o relógio acelera gradualmente. A HUD mostra o nível atual de pressão do operador; os limites mantêm todos os puzzles solucionáveis.
+
 ## Ajustes rápidos
 
 Em `autoload/time_manager.gd`, `seconds_per_game_minute` define quantos segundos reais dura cada minuto, e `time_scale` multiplica a velocidade. O padrão completa um loop em aproximadamente 65 segundos.
